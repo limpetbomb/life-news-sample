@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>住まいと暮らしの安心ガイド | ライフニュース</title>
+  <style>
+    :root {
+      --ink: #222a25;
+      --muted: #677067;
+      --paper: #fbf7ec;
+      --card: #fffefa;
+      --line: #d8d0bc;
+      --olive: #5d7818;
+      --olive-dark: #3f5e10;
+      --green: #116c63;
+      --blue: #376fa6;
+      --purple: #8e6890;
+      --orange: #d47b00;
+      --teal: #14737c;
+      --cream: #f4ead2;
+      --shadow: 0 8px 22px rgba(67, 55, 34, .12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; background: #d8d2c5; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+      letter-spacing: 0;
+      background: var(--paper);
+    }
+
+    button, input { font: inherit; }
+
+    .phone-page {
+      max-width: 430px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.55) 0 1px, transparent 1px),
+        linear-gradient(#fffdf8, var(--paper));
+      background-size: 22px 22px, auto;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 18px 56px rgba(0,0,0,.2);
+      overflow: hidden;
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 14px;
+      background: rgba(255, 253, 247, .94);
+      border-bottom: 1px solid rgba(74, 85, 53, .18);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--olive-dark);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .mark {
+      width: 42px;
+      height: 48px;
+      display: grid;
+      grid-template-rows: 1fr 15px;
+      border: 1px solid #b9c096;
+      background: #fff;
+      box-shadow: 0 2px 7px rgba(0,0,0,.08);
+      position: relative;
+    }
+
+    .mark::before {
+      content: "";
+      position: absolute;
+      left: 17px;
+      top: -7px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 8px solid var(--olive);
+    }
+
+    .mark strong {
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #799623, #476315);
+      color: #fff;
+      font-size: 13px;
+      line-height: 1.05;
+      text-align: center;
+    }
+
+    .mark span {
+      display: grid;
+      place-items: center;
+      color: var(--olive);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .area-pill {
+      min-height: 32px;
+      border: 1px solid #cfc5aa;
+      background: #fffefa;
+      border-radius: 999px;
+      color: #4e5d41;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .hero {
+      padding: 16px 15px 14px;
+      background:
+        linear-gradient(90deg, rgba(255,253,248,.92) 0 52%, rgba(255,253,248,.45) 76%, rgba(255,253,248,.92)),
+        linear-gradient(140deg, #f4ead2 0 22%, #fffdf8 22% 54%, #e9dcc2 54% 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-scene {
+      border: 1px solid #e4d8bf;
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, transparent 0 24%, rgba(138,102,57,.2) 24% 26%, transparent 26%),
+        linear-gradient(180deg, #f8ead1 0 52%, #d6bd91 52% 100%);
+      height: 126px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 13px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.45);
+    }
+
+    .hero-scene::before {
+      content: "";
+      position: absolute;
+      left: 42%;
+      right: 22px;
+      top: 16px;
+      height: 52px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.9) 0 48%, transparent 48% 52%, rgba(255,255,255,.9) 52%),
+        linear-gradient(#b8c58d, #edf4e3);
+      border: 4px solid #fff;
+      box-shadow: 0 0 0 1px rgba(110,90,50,.2);
+    }
+
+    .hero-scene::after {
+      content: "";
+      position: absolute;
+      left: 34px;
+      right: 44px;
+      bottom: 16px;
+      height: 32px;
+      border-radius: 4px;
+      background: #fff7e8;
+      box-shadow:
+        0 -20px 0 -7px #9a7048,
+        68px -12px 0 -10px #6f8c2a,
+        102px -18px 0 -8px #fff6e5;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: #394418;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .18em;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--olive);
+      font-size: 38px;
+      line-height: 1.05;
+      font-weight: 900;
+      text-shadow: 0 1px 0 #fff;
+    }
+
+    h1 span {
+      display: block;
+      color: #181c18;
+      font-size: 30px;
+      font-weight: 850;
+    }
+
+    .subtitle {
+      margin: 9px 0 0;
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 850;
+    }
+
+    .feature-card {
+      margin-top: 13px;
+      display: grid;
+      grid-template-columns: 1fr 82px;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid #d7cbb3;
+      border-radius: 8px;
+      padding: 11px;
+      background: rgba(255,255,255,.9);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-card strong {
+      display: block;
+      color: var(--olive-dark);
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      font-weight: 750;
+    }
+
+    .qr {
+      width: 74px;
+      height: 74px;
+      border: 5px solid #fff;
+      background-color: #fff;
+      box-shadow: 0 0 0 1px #b6ae9a, 0 6px 14px rgba(0,0,0,.1);
+      background-image:
+        linear-gradient(90deg, #101814 0 13%, transparent 13% 25%, #101814 25% 38%, transparent 38% 50%, #101814 50% 63%, transparent 63% 75%, #101814 75%),
+        linear-gradient(#101814 0 11%, transparent 11% 22%, #101814 22% 33%, transparent 33% 44%, #101814 44% 55%, transparent 55% 66%, #101814 66% 77%, transparent 77%);
+      background-blend-mode: multiply;
+    }
+
+    .worry {
+      padding: 12px 14px 10px;
+      background: #fffefa;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .worry h2,
+    .section-head h2 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.25;
+      font-weight: 900;
+    }
+
+    .worry h2 {
+      color: #243421;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .worry-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .worry-item {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 8px;
+      align-items: center;
+      min-height: 72px;
+      border: 1px solid #e1d9c7;
+      border-radius: 7px;
+      padding: 8px;
+      background: linear-gradient(#fff, #f8f3e9);
+    }
+
+    .face {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 38%, #f8dbc6 0 42%, transparent 43%),
+        radial-gradient(circle at 33% 32%, #4d5149 0 3px, transparent 4px),
+        radial-gradient(circle at 64% 32%, #4d5149 0 3px, transparent 4px),
+        linear-gradient(#5f6f66 0 44%, #b9cda2 44%);
+      border: 1px solid #d4c8b5;
+    }
+
+    .worry-item p {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.4;
+      font-weight: 850;
+    }
+
+    .support-copy {
+      margin: 10px 0 0;
+      text-align: center;
+      color: var(--olive-dark);
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.5;
+    }
+
+    .search-box {
+      position: relative;
+      z-index: 30;
+      padding: 11px 14px 9px;
+      background: rgba(255,253,248,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 42px;
+      border: 1px solid #cdbf9d;
+      border-radius: 7px;
+      background: #fff;
+      padding: 0 12px;
+      color: var(--ink);
+      outline: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .category-tabs {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding-top: 9px;
+      scrollbar-width: none;
+    }
+
+    .category-tabs::-webkit-scrollbar { display: none; }
+
+    .tab {
+      white-space: nowrap;
+      min-height: 33px;
+      border: 1px solid #cdbf9d;
+      border-radius: 6px;
+      background: #fff;
+      color: #4f5848;
+      padding: 7px 11px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .tab.active {
+      color: #fff;
+      background: var(--olive);
+      border-color: var(--olive);
+    }
+
+    section { padding: 14px 14px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .count {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .category-section {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      margin-bottom: 12px;
+    }
+
+    .category-title {
+      min-height: 42px;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      align-items: center;
+      color: #fff;
+      background: var(--olive);
+      font-weight: 900;
+    }
+
+    .category-title b {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      background: rgba(0,0,0,.12);
+    }
+
+    .category-title span {
+      padding: 0 11px;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .category-title small {
+      display: block;
+      margin-top: 2px;
+      opacity: .95;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .category-section[data-color="blue"] .category-title { background: var(--blue); }
+    .category-section[data-color="purple"] .category-title { background: var(--purple); }
+    .category-section[data-color="orange"] .category-title { background: var(--orange); }
+    .category-section[data-color="teal"] .category-title { background: var(--teal); }
+
+    .company-list {
+      display: grid;
+      gap: 8px;
+      padding: 9px;
+    }
+
+    .company-card,
+    .info-card,
+    .detail-panel,
+    .web-bridge,
+    .operation-card {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(44, 49, 35, .06);
+    }
+
+    .company-card {
+      display: grid;
+      grid-template-columns: 104px 1fr;
+      min-height: 148px;
+    }
+
+    .photo {
+      min-height: 148px;
+      background: #e6e3d7;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo::before,
+    .photo::after {
+      content: "";
+      position: absolute;
+      display: block;
+    }
+
+    .kitchen { background: linear-gradient(180deg, #ead9bd 0 42%, #fff9ec 42% 60%, #a98355 60%); }
+    .kitchen::before { left: 13px; right: 13px; bottom: 27px; height: 31px; border-radius: 4px; background: #fffdf8; box-shadow: 0 -23px 0 -10px #fff; }
+    .builder { background: linear-gradient(180deg, #cfdcab 0 52%, #d7c99e 52%); }
+    .builder::before { left: 20px; right: 20px; bottom: 31px; height: 36px; background: #fff9eb; box-shadow: inset 0 0 0 4px #9da56b; }
+    .builder::after { left: 14px; right: 14px; bottom: 65px; height: 27px; background: #657b27; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+    .estate { background: linear-gradient(180deg, #cad9e7 0 40%, #ebe3d3 40%); }
+    .estate::before { left: 34px; right: 34px; top: 22px; bottom: 25px; background: repeating-linear-gradient(180deg, #f8faf7 0 12px, #71869a 12px 17px); box-shadow: 0 0 0 3px #667a78; }
+    .insurance { background: linear-gradient(135deg, #f0dfc8 0 46%, #fff 46% 60%, #dce8d0 60%); }
+    .insurance::before { left: 16px; bottom: 31px; width: 25px; height: 44px; border-radius: 17px 17px 9px 9px; background: #746c5d; box-shadow: 29px 0 0 #a36c64, 58px 0 0 #667a54; }
+    .inherit { background: linear-gradient(135deg, #f5ead6, #ffffff 58%, #e1ebd9); }
+    .inherit::before { left: 19px; right: 13px; top: 28px; bottom: 34px; background: repeating-linear-gradient(180deg, #fff 0 12px, #d3bf8c 12px 14px); transform: rotate(-4deg); box-shadow: 8px 8px 0 rgba(70,60,45,.12); }
+    .bath { background: linear-gradient(135deg, #e6edf2 0 44%, #fff 44% 64%, #b8d0d4 64%); }
+    .bath::before { left: 17px; right: 16px; bottom: 30px; height: 48px; border-radius: 40px 40px 12px 12px; background: #fff; box-shadow: 0 -16px 0 -8px #c6d9dd; }
+
+    .company-body {
+      padding: 10px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .tag {
+      width: fit-content;
+      border-radius: 4px;
+      padding: 4px 7px;
+      background: #f1e2bf;
+      color: #745012;
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.25;
+      font-weight: 900;
+    }
+
+    .catch {
+      margin: 0;
+      color: #363f37;
+      font-size: 12.5px;
+      line-height: 1.48;
+      font-weight: 800;
+    }
+
+    .meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 800;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 54px;
+      gap: 7px;
+      margin-top: 1px;
+    }
+
+    .btn {
+      min-height: 34px;
+      border: 1px solid var(--olive-dark);
+      border-radius: 6px;
+      padding: 7px 9px;
+      background: var(--olive);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .btn.secondary {
+      background: #fff;
+      color: var(--olive-dark);
+    }
+
+    .mini-qr {
+      width: 28px;
+      height: 28px;
+      margin-left: auto;
+      background:
+        repeating-linear-gradient(90deg, #111 0 4px, #fff 4px 8px),
+        repeating-linear-gradient(0deg, rgba(17,17,17,.9) 0 3px, transparent 3px 7px);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 1px #222;
+    }
+
+    .detail-panel { margin-top: 10px; }
+
+    .detail-header {
+      padding: 12px;
+      background: linear-gradient(180deg, #fff, #fbf5e7);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 6px;
+      padding: 0 12px 12px;
+    }
+
+    .gallery .photo {
+      min-height: 116px;
+      border-radius: 6px;
+      border: 1px solid #ddd2b9;
+    }
+
+    .map {
+      margin: 0 12px 12px;
+      height: 126px;
+      border: 1px solid #cfd8d5;
+      border-radius: 7px;
+      background:
+        linear-gradient(90deg, transparent 0 28%, rgba(55,111,166,.28) 28% 31%, transparent 31% 100%),
+        linear-gradient(0deg, transparent 0 58%, rgba(212,123,0,.26) 58% 62%, transparent 62% 100%),
+        repeating-linear-gradient(35deg, #edf2ef 0 24px, #f9f7f0 24px 48px);
+      position: relative;
+    }
+
+    .map::before {
+      content: "";
+      position: absolute;
+      left: 52%;
+      top: 34%;
+      width: 22px;
+      height: 22px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      background: var(--orange);
+      box-shadow: 0 3px 10px rgba(0,0,0,.18);
+    }
+
+    .hours {
+      margin: 0 12px 12px;
+      padding: 11px;
+      border-radius: 7px;
+      background: #f7efd9;
+      color: #43504d;
+      font-size: 12px;
+      line-height: 1.6;
+      font-weight: 800;
+    }
+
+    .detail-actions {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 11px 12px;
+      background: rgba(255,253,248,.96);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .contents {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    .info-card { min-height: 154px; }
+
+    .info-visual {
+      height: 68px;
+      background: #e9f0da;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-visual::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      right: 15px;
+      bottom: 17px;
+      height: 23px;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 -17px 0 -9px var(--olive);
+    }
+
+    .info-card:nth-child(2) .info-visual { background: #f5e6c7; }
+    .info-card:nth-child(3) .info-visual { background: #ddebf0; }
+    .info-card:nth-child(4) .info-visual { background: #eee2ea; }
+
+    .info-card div:last-child { padding: 10px; }
+
+    .info-card strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .info-card p,
+    .operation-card p,
+    .web-bridge p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+      font-weight: 800;
+    }
+
+    .web-bridge {
+      display: grid;
+      grid-template-columns: 1fr 78px;
+      gap: 10px;
+      padding: 12px;
+      margin-top: 10px;
+      background: linear-gradient(135deg, #f9f4e6, #fff);
+    }
+
+    .web-bridge strong,
+    .operation-card strong {
+      display: block;
+      color: var(--olive-dark);
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 5px;
+      font-weight: 900;
+    }
+
+    .flow {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.72);
+      margin-top: 10px;
+    }
+
+    .flow-step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 8px;
+      align-items: center;
+      color: #375049;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .flow-step b {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 5px;
+      color: #fff;
+      background: var(--green);
+    }
+
+    .operation { padding-bottom: 76px; }
+
+    .operation-card {
+      padding: 12px;
+      background: #fffefa;
+    }
+
+    .bottom-nav {
+      position: relative;
+      z-index: 45;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: #fffefa;
+      border-top: 1px solid var(--line);
+    }
+
+    .bottom-nav a {
+      min-height: 54px;
+      padding: 8px 4px 7px;
+      text-align: center;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .bottom-nav a strong {
+      display: block;
+      color: var(--olive);
+      font-size: 17px;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    @media (min-width: 431px) {
+      body { padding: 24px 0; }
+      .phone-page { border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone-page">
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark"><strong>LIFE<br>NEWS</strong><span>保存版</span></span>
+        <span>ライフニュース</span>
+      </div>
+      <button class="area-pill" type="button">東丘・北町版</button>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="hero-scene" aria-hidden="true"></div>
+        <p class="eyebrow">地域の住まい情報を、見つけやすく。</p>
+        <h1><span>住まいと暮らしの</span>安心ガイド</h1>
+        <p class="subtitle">2026 初夏号 / 地元で相談できる会社をカテゴリ別に掲載</p>
+        <div class="feature-card">
+          <div>
+            <strong>特集ページ公開中!</strong>
+            <p>施工事例・物件情報・コラムなど、紙面の続きはこちらで確認できます。</p>
+          </div>
+          <div class="qr" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <section class="worry" aria-label="よくある住まいの悩み">
+        <h2>こんなお悩み、ありませんか?</h2>
+        <div class="worry-grid">
+          <div class="worry-item"><span class="face"></span><p>冬の寒さや光熱費が心配</p></div>
+          <div class="worry-item"><span class="face"></span><p>使わない部屋を有効活用したい</p></div>
+          <div class="worry-item"><span class="face"></span><p>実家を相続したけど進め方が不安</p></div>
+          <div class="worry-item"><span class="face"></span><p>保険や老後資金を見直したい</p></div>
+        </div>
+        <p class="support-copy">地元の専門家が、あなたの「安心できる暮らし」をサポートします。</p>
+      </section>
+
+      <div class="search-box">
+        <input id="search" type="search" placeholder="会社名・地域・相談内容で探す">
+        <div class="category-tabs" id="tabs"></div>
+      </div>
+
+      <section id="companies">
+        <div class="section-head">
+          <h2>掲載企業一覧</h2>
+          <span class="count" id="count"></span>
+        </div>
+        <div id="companySections"></div>
+      </section>
+
+      <section id="details">
+        <div class="section-head">
+          <h2>企業詳細</h2>
+          <span class="count">紙面QR対応</span>
+        </div>
+        <div class="detail-panel" id="detailPanel"></div>
+      </section>
+
+      <section id="contents">
+        <div class="section-head">
+          <h2>紙面では載せきれない情報</h2>
+          <span class="count">Web限定</span>
+        </div>
+        <div class="contents">
+          <article class="info-card"><div class="info-visual"></div><div><strong>施工事例</strong><p>リフォーム前後の写真と費用感を確認。</p></div></article>
+          <article class="info-card"><div class="info-visual"></div><div><strong>補助金情報</strong><p>窓改修、省エネ設備、耐震改修を整理。</p></div></article>
+          <article class="info-card"><div class="info-visual"></div><div><strong>住まいの豆知識</strong><p>見積の見方や点検時期をやさしく解説。</p></div></article>
+          <article class="info-card"><div class="info-visual"></div><div><strong>専門家コラム</strong><p>相続、保険、空き家管理の基礎知識。</p></div></article>
+        </div>
+        <div class="web-bridge">
+          <div>
+            <strong>紙面の情報をもっと詳しく!</strong>
+            <p>各社の施工事例、営業時間、問い合わせ先をスマホで見られます。</p>
+          </div>
+          <div class="qr" aria-hidden="true"></div>
+        </div>
+        <div class="flow">
+          <div class="flow-step"><b>1</b><span>紙面をチェックして気になる企業を見つける</span></div>
+          <div class="flow-step"><b>2</b><span>QRコードからスマホで詳細へアクセス</span></div>
+          <div class="flow-step"><b>3</b><span>Webで施工事例・地図・営業時間を確認</span></div>
+          <div class="flow-step"><b>4</b><span>電話や問い合わせで地元企業へ相談</span></div>
+        </div>
+      </section>
+
+      <section class="operation" id="operation">
+        <div class="section-head">
+          <h2>運用イメージ</h2>
+          <span class="count">共通データ管理</span>
+        </div>
+        <div class="operation-card">
+          <strong>紙面・Web・営業資料を同じ企業データで更新</strong>
+          <p>会社名、カテゴリ、写真、所在地、電話番号、営業時間、掲載号を一元管理。営業担当が入力した情報を紙面原稿、Webカード、企業詳細ページへ共通利用する設計です。</p>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="ページ内メニュー">
+      <a href="#companies"><strong>一覧</strong>企業を探す</a>
+      <a href="#contents"><strong>特集</strong>記事を見る</a>
+      <a href="#details"><strong>相談</strong>詳細へ進む</a>
+    </nav>
+  </div>
+
+  <script>
+    const categories = ["すべて", "リフォーム", "不動産", "相続相談", "保険", "住宅設備"];
+    const categoryMeta = {
+      "リフォーム": { no: 1, title: "リフォームで、もっと快適な住まいへ", sub: "キッチン・浴室・外壁・間取り変更", color: "olive" },
+      "不動産": { no: 2, title: "不動産のこと、なんでもご相談ください", sub: "売買・住み替え・土地探し・空き家活用", color: "blue" },
+      "相続相談": { no: 3, title: "相続・空き家の悩み、専門家に相談を", sub: "相続手続き・遺言書作成・売却活用", color: "purple" },
+      "保険": { no: 4, title: "将来の安心のために、今できる備えを", sub: "生命保険・医療保険・火災保険", color: "orange" },
+      "住宅設備": { no: 5, title: "住宅設備・暮らしサポート", sub: "給湯器・太陽光・防犯・片付け", color: "teal" }
+    };
+    const companies = [
+      { id: "midori", category: "リフォーム", photo: "kitchen", name: "みどり住建リフォーム", catch: "水まわりから断熱まで、地元職人が丁寧に対応。", area: "東丘町3-12-8", tel: "0120-245-610", hours: "9:00-18:00 / 水曜定休", note: "キッチン・浴室・外壁の施工事例を多数掲載。" },
+      { id: "harumi", category: "リフォーム", photo: "bath", name: "晴海設備", catch: "浴室、給湯器、洗面台の交換をまとめて相談。", area: "南丘7-4-2", tel: "0120-810-314", hours: "8:30-18:00 / 日曜定休", note: "急な故障、補助金対象設備の見積もりも対応。" },
+      { id: "kaze", category: "リフォーム", photo: "builder", name: "暮らし工房 風", catch: "家族構成に合わせた木の家とリノベーション。", area: "北町1-5-3", tel: "0120-456-870", hours: "10:00-17:30 / 日曜予約制", note: "新築、間取り変更、和室改修の相談に対応。" },
+      { id: "azuma", category: "不動産", photo: "estate", name: "東丘不動産", catch: "住み替え、査定、空き家活用を地域相場から提案。", area: "東丘駅前2-1-6", tel: "025-278-8800", hours: "9:30-18:00 / 火曜定休", note: "新着物件と売却相談の予約を受け付け中。" },
+      { id: "kitamachi", category: "不動産", photo: "builder", name: "北町ベイ不動産", catch: "空き家・相続不動産の相談も受付中。", area: "北町通1-826", tel: "025-384-8118", hours: "9:30-18:00 / 水曜定休", note: "土地、中古住宅、住み替えの相談を地域密着で対応。" },
+      { id: "aoba", category: "相続相談", photo: "inherit", name: "青葉司法書士事務所", catch: "実家の相続、登記、空き家管理を初回からわかりやすく。", area: "中央通り5-2-4", tel: "025-201-5501", hours: "9:00-17:00 / 平日営業", note: "登記義務化、名義変更、遺言の相談に対応。" },
+      { id: "mirai", category: "相続相談", photo: "insurance", name: "みらい相続相談室", catch: "税理士・FPが連携して相続と生前対策をサポート。", area: "長大通2-3-5", tel: "025-290-7702", hours: "10:00-17:00 / 予約制", note: "相続税、財産整理、空き家活用の相談に対応。" },
+      { id: "partner", category: "保険", photo: "insurance", name: "ライフパートナー保険", catch: "火災・地震・水害の補償を住まいに合わせて整理。", area: "緑台4-8-11", tel: "0120-111-259", hours: "10:00-19:00 / 土曜相談可", note: "築年数や家族構成に合わせた見直し診断。" },
+      { id: "anshin", category: "保険", photo: "inherit", name: "あんしん保険サービス", catch: "医療・介護・老後資金まで家計の見直しをお手伝い。", area: "西区下本1-4-25", tel: "0120-552-661", hours: "10:00-18:00 / 日曜定休", note: "生命保険、火災保険、老後資金の相談に対応。" },
+      { id: "energy", category: "住宅設備", photo: "bath", name: "中央エネルギー", catch: "エコキュート・ガス給湯器の交換、修理に対応。", area: "中央区住吉1-8", tel: "0120-66-1948", hours: "8:00-19:00 / 受付無休", note: "急な給湯器故障、交換見積、設備点検の相談に対応。" },
+      { id: "solar", category: "住宅設備", photo: "builder", name: "ソラ住まいラボ", catch: "電気代を賢く節約。太陽光と蓄電池を比較できます。", area: "東区明石2-10", tel: "0120-319-881", hours: "9:00-18:00 / 予約制", note: "太陽光、蓄電池、V2Hの無料シミュレーションに対応。" }
+    ];
+
+    let activeCategory = "すべて";
+    let selected = companies[0];
+
+    const tabs = document.getElementById("tabs");
+    const sections = document.getElementById("companySections");
+    const count = document.getElementById("count");
+    const detailPanel = document.getElementById("detailPanel");
+    const search = document.getElementById("search");
+
+    function renderTabs() {
+      tabs.innerHTML = categories.map(category => (
+        `<button type="button" class="tab ${category === activeCategory ? "active" : ""}" data-category="${category}">${category}</button>`
+      )).join("");
+    }
+
+    function filteredCompanies() {
+      const q = search.value.trim().toLowerCase();
+      return companies.filter(company => {
+        const categoryMatch = activeCategory === "すべて" || company.category === activeCategory;
+        const text = `${company.name} ${company.catch} ${company.area} ${company.category}`.toLowerCase();
+        return categoryMatch && text.includes(q);
+      });
+    }
+
+    function renderCompany(company) {
+      return `
+        <article class="company-card">
+          <div class="photo ${company.photo}" aria-hidden="true"></div>
+          <div class="company-body">
+            <span class="tag">${company.category}</span>
+            <h3>${company.name}</h3>
+            <p class="catch">${company.catch}</p>
+            <p class="meta">${company.area}<br>${company.tel}</p>
+            <div class="actions">
+              <button class="btn" type="button" data-detail="${company.id}">詳しく見る</button>
+              <a class="btn secondary" href="tel:${company.tel.replaceAll("-", "")}">電話</a>
+            </div>
+            <span class="mini-qr" aria-hidden="true"></span>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderList() {
+      const items = filteredCompanies();
+      count.textContent = `${items.length}件掲載`;
+      const visibleCategories = categories.filter(category => category !== "すべて" && items.some(company => company.category === category));
+      sections.innerHTML = visibleCategories.map(category => {
+        const meta = categoryMeta[category];
+        const cards = items.filter(company => company.category === category).map(renderCompany).join("");
+        return `
+          <section class="category-section" data-color="${meta.color}">
+            <div class="category-title"><b>${meta.no}</b><span>${meta.title}<small>${meta.sub}</small></span></div>
+            <div class="company-list">${cards}</div>
+          </section>
+        `;
+      }).join("");
+    }
+
+    function renderDetail(company) {
+      selected = company;
+      detailPanel.innerHTML = `
+        <div class="detail-header">
+          <span class="tag">${company.category}</span>
+          <h3>${company.name}</h3>
+          <p class="catch">${company.note}</p>
+          <p class="meta">${company.area}<br>${company.tel}</p>
+        </div>
+        <div class="gallery">
+          <div class="photo ${company.photo}" aria-hidden="true"></div>
+          <div class="photo builder" aria-hidden="true"></div>
+        </div>
+        <div class="map" aria-label="Googleマップ表示エリア"></div>
+        <p class="hours">営業時間: ${company.hours}<br>所在地: ${company.area}<br>写真ギャラリー、Googleマップ、問い合わせ導線を企業データから表示。</p>
+        <div class="detail-actions">
+          <a class="btn" href="tel:${company.tel.replaceAll("-", "")}">問い合わせ</a>
+          <a class="btn secondary" href="#companies">一覧に戻る</a>
+        </div>
+      `;
+    }
+
+    tabs.addEventListener("click", event => {
+      const button = event.target.closest("button[data-category]");
+      if (!button) return;
+      activeCategory = button.dataset.category;
+      renderTabs();
+      renderList();
+    });
+
+    sections.addEventListener("click", event => {
+      const button = event.target.closest("button[data-detail]");
+      if (!button) return;
+      const company = companies.find(item => item.id === button.dataset.detail);
+      renderDetail(company);
+      document.getElementById("details").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    search.addEventListener("input", renderList);
+
+    renderTabs();
+    renderList();
+    renderDetail(selected);
+  </script>
+</body>
+</html>

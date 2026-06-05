@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ライフニュース 住まいと暮らしの安心ガイド</title>
+  <style>
+    :root {
+      --ink: #26302f;
+      --muted: #68716e;
+      --paper: #f7f4ed;
+      --line: #d5cec0;
+      --green: #1f6b57;
+      --green-2: #dfece5;
+      --blue: #28617b;
+      --blue-2: #dfeaf0;
+      --gold: #b47b2b;
+      --gold-2: #f1e5d1;
+      --rose: #9d5952;
+      --rose-2: #eee0dc;
+      --gray: #e8e4db;
+      --shadow: 0 1.5mm 4mm rgba(37, 43, 41, .12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #ded9cf;
+      color: var(--ink);
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+      letter-spacing: 0;
+    }
+
+    .sheet {
+      width: 406mm;
+      height: 546mm;
+      margin: 0 auto;
+      padding: 10mm;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.35) 0 1px, transparent 1px 100%),
+        linear-gradient(#faf8f2, var(--paper));
+      background-size: 7mm 7mm, auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .masthead {
+      height: 64mm;
+      display: grid;
+      grid-template-columns: 1fr 82mm;
+      gap: 7mm;
+      border: 1.2mm solid var(--green);
+      background: #fffdf8;
+      box-shadow: var(--shadow);
+      margin-bottom: 6mm;
+    }
+
+    .brand {
+      padding: 6mm 9mm 6mm;
+      display: grid;
+      grid-template-columns: 31mm 1fr;
+      gap: 7mm;
+      align-items: center;
+    }
+
+    .life-mark {
+      width: 31mm;
+      height: 31mm;
+      border-radius: 50%;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.3), transparent 46%),
+        conic-gradient(from 20deg, #1f6b57, #2f7f9d, #b47b2b, #1f6b57);
+      color: white;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 800;
+      line-height: 1.05;
+      font-size: 8.3mm;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 6.2mm;
+      margin-bottom: 1.5mm;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 14.5mm;
+      line-height: 1.04;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .sub {
+      margin-top: 2mm;
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      font-size: 4.8mm;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .sub b {
+      color: #fff;
+      background: var(--gold);
+      padding: 1.2mm 2.7mm;
+      border-radius: 1mm;
+    }
+
+    .feature-qr {
+      border-left: .6mm solid var(--line);
+      padding: 5mm;
+      display: grid;
+      grid-template-columns: 31mm 1fr;
+      gap: 4mm;
+      align-items: center;
+      background: var(--green-2);
+    }
+
+    .feature-qr strong {
+      display: block;
+      font-size: 6.2mm;
+      line-height: 1.12;
+      color: var(--green);
+      margin-bottom: 2mm;
+    }
+
+    .feature-qr p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 3.6mm;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .qr {
+      width: 100%;
+      aspect-ratio: 1;
+      background-color: #fff;
+      border: .9mm solid #fff;
+      box-shadow: inset 0 0 0 .45mm #273331;
+      background-image:
+        linear-gradient(90deg, #273331 0 14%, transparent 14% 28%, #273331 28% 42%, transparent 42% 56%, #273331 56% 70%, transparent 70% 84%, #273331 84%),
+        linear-gradient(#273331 0 12%, transparent 12% 24%, #273331 24% 36%, transparent 36% 48%, #273331 48% 60%, transparent 60% 72%, #273331 72% 84%, transparent 84%);
+      background-blend-mode: multiply;
+    }
+
+    .main-grid {
+      height: 450mm;
+      display: grid;
+      grid-template-columns: 1.15fr .9fr .85fr;
+      grid-template-rows: 159mm 121mm 160mm;
+      gap: 5mm;
+    }
+
+    .zone {
+      border: .65mm solid var(--line);
+      background: rgba(255,255,255,.74);
+      display: grid;
+      grid-template-rows: 13mm 1fr;
+      min-height: 0;
+    }
+
+    .zone h2 {
+      margin: 0;
+      padding: 2.2mm 4mm 0;
+      color: #fff;
+      font-size: 6.7mm;
+      line-height: 1;
+      font-weight: 900;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .zone h2 span {
+      font-size: 3.7mm;
+      font-weight: 800;
+      opacity: .9;
+    }
+
+    .zone.reform { grid-row: span 2; }
+    .zone.reform h2 { background: var(--green); }
+    .zone.realestate h2 { background: var(--blue); }
+    .zone.inherit h2 { background: var(--gold); }
+    .zone.insurance h2 { background: var(--rose); }
+    .zone.facility h2 { background: #59625f; }
+
+    .ads {
+      padding: 3mm;
+      display: grid;
+      gap: 3mm;
+      min-height: 0;
+    }
+
+    .reform .ads { grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; }
+    .realestate .ads { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+    .inherit .ads, .insurance .ads { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+    .facility { grid-column: 1 / 4; }
+    .facility .ads { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+    .ad {
+      background: #fff;
+      border: .45mm solid #cfc8ba;
+      box-shadow: 0 .7mm 1.6mm rgba(38, 48, 47, .08);
+      display: grid;
+      grid-template-rows: 36% 1fr 12mm;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .ad.wide { grid-column: span 2; grid-template-rows: 43% 1fr 12mm; }
+    .ad.compact { grid-template-rows: 42% 1fr 11mm; }
+
+    .photo {
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+      background: var(--gray);
+    }
+
+    .photo::before,
+    .photo::after {
+      content: "";
+      position: absolute;
+      inset: auto;
+      display: block;
+    }
+
+    .p-kitchen {
+      background:
+        linear-gradient(90deg, transparent 0 59%, rgba(255,255,255,.88) 59% 61%, transparent 61%),
+        linear-gradient(180deg, #bcd1cd 0 42%, #f5f2ea 42% 59%, #9d8364 59% 100%);
+    }
+    .p-kitchen::before {
+      left: 9%; right: 9%; bottom: 12%; height: 28%;
+      background: linear-gradient(90deg, #ebe6db, #fff, #d3cab8);
+      border-radius: 1mm;
+      box-shadow: 8mm -13mm 0 -2mm #ffffff, 27mm -13mm 0 -2mm #ffffff;
+    }
+
+    .p-bath { background: linear-gradient(135deg, #dfeaf0 0 46%, #ffffff 46% 66%, #98b7bd 66%); }
+    .p-bath::before { left: 12%; right: 12%; bottom: 13%; height: 35%; border-radius: 50% 50% 12% 12%; background: #fff; box-shadow: 0 -8mm 0 -4mm #c5d8dc; }
+
+    .p-roof { background: linear-gradient(180deg, #a4c3d4 0 50%, #ece7d9 50% 100%); }
+    .p-roof::before { left: 8%; right: 8%; bottom: 22%; height: 20%; transform: skewY(-7deg); background: #6f5149; box-shadow: 0 8mm 0 #7d5d55; }
+
+    .p-room { background: linear-gradient(135deg, #e5d8c6 0 38%, #ffffff 38% 55%, #81998c 55% 100%); }
+    .p-room::before { left: 10%; right: 10%; bottom: 15%; height: 24%; background: #d4bd94; border-radius: 1mm; }
+
+    .p-house { background: linear-gradient(180deg, #b9d2dd 0 55%, #d9d4bd 55%); }
+    .p-house::before { left: 14%; right: 14%; bottom: 15%; height: 33%; background: #fffaf1; box-shadow: inset 0 0 0 1.2mm #a9b9b0; }
+    .p-house::after { left: 10%; right: 10%; bottom: 45%; height: 18%; background: #4e6f68; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+
+    .p-mansion { background: linear-gradient(180deg, #b7cbd7 0 40%, #e5e0d4 40%); }
+    .p-mansion::before { left: 26%; right: 26%; top: 12%; bottom: 10%; background: repeating-linear-gradient(180deg, #eef1ed 0 8%, #7c9aa4 8% 12%); box-shadow: 0 0 0 1.1mm #6c7c7a; }
+
+    .p-family { background: linear-gradient(135deg, #efe0c7 0 45%, #fff 45% 60%, #bfd4cd 60%); }
+    .p-family::before { left: 18%; top: 26%; width: 14%; height: 28%; border-radius: 50% 50% 35% 35%; background: #70605a; box-shadow: 15mm 0 0 #8f645d, 30mm 0 0 #5d726b; }
+    .p-family::after { left: 12%; right: 12%; bottom: 15%; height: 14%; background: rgba(255,255,255,.78); border-radius: 12mm; }
+
+    .p-paper { background: linear-gradient(135deg, #efe8d6, #ffffff 58%, #d9e5df); }
+    .p-paper::before { left: 14%; right: 14%; top: 17%; bottom: 17%; background: repeating-linear-gradient(180deg, #fff 0 12%, #d9c8a6 12% 14%); transform: rotate(-4deg); box-shadow: 4mm 4mm 0 rgba(70,60,45,.14); }
+
+    .copy {
+      padding: 2.7mm 3.2mm 1.4mm;
+      min-height: 0;
+    }
+
+    .label {
+      display: inline-block;
+      background: var(--gold-2);
+      color: #6f4a17;
+      font-weight: 900;
+      font-size: 3.4mm;
+      padding: .6mm 1.7mm;
+      border-radius: .8mm;
+      margin-bottom: 1.2mm;
+    }
+
+    .ad h3 {
+      margin: 0 0 1.2mm;
+      font-size: 6.6mm;
+      line-height: 1.08;
+      font-weight: 900;
+    }
+
+    .ad.compact h3 { font-size: 5.4mm; }
+
+    .lead {
+      margin: 0;
+      font-size: 4.2mm;
+      line-height: 1.32;
+      color: #3a4442;
+      font-weight: 700;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2mm;
+      border-top: .35mm solid #e3ddd2;
+      padding: 1.4mm 2.7mm;
+      background: #fbfaf7;
+      min-height: 0;
+    }
+
+    .company {
+      font-weight: 900;
+      font-size: 4mm;
+      line-height: 1.12;
+    }
+
+    .company small {
+      display: block;
+      color: var(--muted);
+      font-size: 3.1mm;
+      font-weight: 700;
+      margin-top: .4mm;
+    }
+
+    .mini-qr {
+      width: 8.7mm;
+      min-width: 8.7mm;
+      aspect-ratio: 1;
+      background:
+        repeating-linear-gradient(90deg, #26302f 0 1.1mm, #fff 1.1mm 2.2mm),
+        repeating-linear-gradient(0deg, rgba(38,48,47,.9) 0 .8mm, transparent .8mm 1.8mm);
+      border: .6mm solid #fff;
+      box-shadow: 0 0 0 .25mm #26302f;
+    }
+
+    .qr-caption {
+      font-size: 3mm;
+      color: var(--muted);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .stack {
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+    }
+
+    .notice {
+      position: absolute;
+      left: 10mm;
+      right: 10mm;
+      bottom: 4mm;
+      display: flex;
+      justify-content: space-between;
+      color: #766f64;
+      font-size: 3.2mm;
+      font-weight: 700;
+    }
+
+    @page { size: 406mm 546mm; margin: 0; }
+  </style>
+</head>
+<body>
+  <main class="sheet" aria-label="ライフニュース 住まいと暮らしの安心ガイド 折込チラシ案">
+    <header class="masthead">
+      <section class="brand">
+        <div class="life-mark">LIFE<br>NEWS</div>
+        <div>
+          <small>地域の住まい情報を、見つけやすく。</small>
+          <h1>住まいと暮らしの<br>安心ガイド</h1>
+          <div class="sub"><b>保存版</b> 2026 初夏号 / 地元で相談できる会社をカテゴリ別に掲載</div>
+        </div>
+      </section>
+      <aside class="feature-qr">
+        <div class="qr" aria-hidden="true"></div>
+        <div>
+          <strong>特集ページ<br>公開中</strong>
+          <p>補助金・施工事例・物件情報をWebでも確認できます。紙面掲載企業の詳細はこちら。</p>
+        </div>
+      </aside>
+    </header>
+
+    <section class="main-grid">
+      <section class="zone reform">
+        <h2>リフォーム <span>水まわり・外装・断熱・内装</span></h2>
+        <div class="ads">
+          <article class="ad wide">
+            <div class="photo p-kitchen"></div>
+            <div class="copy">
+              <span class="label">相談無料</span>
+              <h3>毎日が明るくなる<br>キッチン改修フェア</h3>
+              <p class="lead">使いやすい動線、収納、掃除のしやすさまで地元職人が丁寧にご提案。</p>
+            </div>
+            <div class="meta">
+              <div class="company">みどり住建リフォーム<small>電話 0120-245-610</small></div>
+              <div class="stack"><span class="qr-caption">施工事例はこちら</span><span class="mini-qr"></span></div>
+            </div>
+          </article>
+          <article class="ad">
+            <div class="photo p-bath"></div>
+            <div class="copy">
+              <span class="label">浴室・洗面</span>
+              <h3>冬も安心、暖かい浴室へ</h3>
+              <p class="lead">断熱浴槽・手すり設置・段差解消をまとめて相談。</p>
+            </div>
+            <div class="meta">
+              <div class="company">晴海設備<small>地域密着35年</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+          <article class="ad">
+            <div class="photo p-roof"></div>
+            <div class="copy">
+              <span class="label">外壁・屋根</span>
+              <h3>台風前の無料点検</h3>
+              <p class="lead">写真付き診断書で状態をわかりやすくご説明。</p>
+            </div>
+            <div class="meta">
+              <div class="company">北町ペイント<small>見積無料</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+          <article class="ad">
+            <div class="photo p-room"></div>
+            <div class="copy">
+              <span class="label">内装</span>
+              <h3>和室をくつろぎ空間に</h3>
+              <p class="lead">床・壁紙・照明を一体でコーディネート。</p>
+            </div>
+            <div class="meta">
+              <div class="company">暮らし工房 風<small>予約制相談会</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+          <article class="ad">
+            <div class="photo p-house"></div>
+            <div class="copy">
+              <span class="label">断熱</span>
+              <h3>窓から始める省エネ</h3>
+              <p class="lead">内窓・玄関ドア交換。補助金の使い方も案内。</p>
+            </div>
+            <div class="meta">
+              <div class="company">あさひサッシ<small>補助金対応</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone realestate">
+        <h2>不動産 <span>売買・査定・住み替え</span></h2>
+        <div class="ads">
+          <article class="ad">
+            <div class="photo p-house"></div>
+            <div class="copy">
+              <span class="label">新着物件</span>
+              <h3>庭付き平屋 3LDK</h3>
+              <p class="lead">駅徒歩圏、駐車2台。週末オープンハウス開催。</p>
+            </div>
+            <div class="meta">
+              <div class="company">東丘不動産<small>物件番号 LN-061</small></div>
+              <div class="stack"><span class="qr-caption">詳しい情報</span><span class="mini-qr"></span></div>
+            </div>
+          </article>
+          <article class="ad">
+            <div class="photo p-mansion"></div>
+            <div class="copy">
+              <span class="label">無料査定</span>
+              <h3>今の家、いくらで売れる？</h3>
+              <p class="lead">相続・住み替え前の相談歓迎。地域相場を丁寧に説明。</p>
+            </div>
+            <div class="meta">
+              <div class="company">まちの住まい相談所<small>秘密厳守</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone inherit">
+        <h2>相続 <span>登記・空き家・税務</span></h2>
+        <div class="ads">
+          <article class="ad compact">
+            <div class="photo p-paper"></div>
+            <div class="copy">
+              <span class="label">初回30分無料</span>
+              <h3>実家の相続、何から始める？</h3>
+              <p class="lead">登記義務化・名義変更・空き家管理をまとめて確認。</p>
+            </div>
+            <div class="meta">
+              <div class="company">青葉司法書士事務所<small>予約受付中</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+          <article class="ad compact">
+            <div class="photo p-family"></div>
+            <div class="copy">
+              <span class="label">セミナー</span>
+              <h3>家族で話す財産整理</h3>
+              <p class="lead">税理士・FPがわかりやすく解説。参加無料。</p>
+            </div>
+            <div class="meta">
+              <div class="company">みらい相続相談室<small>6/22開催</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone insurance">
+        <h2>保険 <span>火災・地震・見直し</span></h2>
+        <div class="ads">
+          <article class="ad compact">
+            <div class="photo p-house"></div>
+            <div class="copy">
+              <span class="label">診断無料</span>
+              <h3>住まいの保険、足りていますか</h3>
+              <p class="lead">築年数・家族構成に合わせて補償を整理。</p>
+            </div>
+            <div class="meta">
+              <div class="company">ライフパートナー保険<small>来店・訪問可</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+          <article class="ad compact">
+            <div class="photo p-roof"></div>
+            <div class="copy">
+              <span class="label">災害対策</span>
+              <h3>台風・水害への備え</h3>
+              <p class="lead">ハザード情報と補償内容を一緒に確認。</p>
+            </div>
+            <div class="meta">
+              <div class="company">北浜総合代理店<small>土曜相談可</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone facility">
+        <h2>住宅設備・暮らしサポート <span>給湯器・太陽光・防犯・清掃</span></h2>
+        <div class="ads">
+          <article class="ad compact">
+            <div class="photo p-bath"></div>
+            <div class="copy">
+              <span class="label">給湯器</span>
+              <h3>急な故障も即日相談</h3>
+              <p class="lead">エコキュート・ガス給湯器の交換見積。</p>
+            </div>
+            <div class="meta">
+              <div class="company">中央エネルギー<small>24時間受付</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+          <article class="ad compact">
+            <div class="photo p-house"></div>
+            <div class="copy">
+              <span class="label">太陽光</span>
+              <h3>電気代を見直す屋根活用</h3>
+              <p class="lead">蓄電池・V2Hも比較できます。</p>
+            </div>
+            <div class="meta">
+              <div class="company">ソラ住まいラボ<small>無料シミュレーション</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+          <article class="ad compact">
+            <div class="photo p-room"></div>
+            <div class="copy">
+              <span class="label">防犯</span>
+              <h3>玄関まわりの安心対策</h3>
+              <p class="lead">カメラ・センサーライト・鍵交換。</p>
+            </div>
+            <div class="meta">
+              <div class="company">守るホームサービス<small>現地確認無料</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+          <article class="ad compact">
+            <div class="photo p-family"></div>
+            <div class="copy">
+              <span class="label">暮らし</span>
+              <h3>片付け・空き家管理</h3>
+              <p class="lead">実家の整理から定期巡回まで。</p>
+            </div>
+            <div class="meta">
+              <div class="company">まごころ整理便<small>見積無料</small></div>
+              <div class="stack"><span class="mini-qr"></span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+    <div class="notice">
+      <span>ライフニュース 住まいと暮らしの安心ガイド / 地方新聞折込連合広告 リニューアル案</span>
+      <span>掲載内容は紙面提案用のダミーです</span>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>掲載企業詳細 | 住まいと暮らしの安心ガイド</title>
+  <style>
+    :root {
+      --ink: #222a25;
+      --muted: #667067;
+      --paper: #f5f7f3;
+      --card: #ffffff;
+      --line: #d9e0dc;
+      --olive: #13766d;
+      --olive-dark: #0b514b;
+      --green: #13766d;
+      --blue: #2d6f9f;
+      --orange: #b9822f;
+      --shadow: 0 18px 45px rgba(28, 42, 39, .11);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+      letter-spacing: 0;
+      background:
+        linear-gradient(180deg, #fbfcfa 0, var(--paper) 520px),
+        radial-gradient(circle at 10% 0%, rgba(19, 118, 109, .08), transparent 420px);
+    }
+
+    a { color: inherit; }
+
+    .topbar {
+      background: rgba(255,255,255,.94);
+      border-bottom: 1px solid rgba(217, 224, 220, .9);
+    }
+
+    .topbar-inner,
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .topbar-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      color: var(--olive-dark);
+      font-weight: 900;
+      line-height: 1;
+      text-decoration: none;
+    }
+
+    .mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      box-shadow: 0 8px 18px rgba(19,118,109,.22);
+      overflow: hidden;
+    }
+
+    .mark strong {
+      display: grid;
+      place-items: center;
+      background: transparent;
+      color: #fff;
+      font-size: 12px;
+      line-height: 1.05;
+      text-align: center;
+    }
+
+    .mark span { display: none; }
+
+    .back-link {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--olive-dark);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .container {
+      padding-top: 26px;
+      padding-bottom: 56px;
+    }
+
+    .breadcrumb {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .main-card,
+    .side-card,
+    .article-card,
+    .map-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .main-visual {
+      height: 330px;
+      background: #e5ebe7;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .main-visual::before,
+    .main-visual::after,
+    .photo::before,
+    .photo::after {
+      content: "";
+      position: absolute;
+      display: block;
+    }
+
+    .kitchen { background: linear-gradient(180deg, #d8e6df 0 42%, #fff 42% 60%, #c6a782 60%); }
+    .kitchen::before { left: 18%; right: 18%; bottom: 22%; height: 28%; border-radius: 7px; background: #fffdf8; box-shadow: 0 -44px 0 -20px #fff; }
+    .builder { background: linear-gradient(180deg, #cfe0d4 0 52%, #ded2b6 52%); }
+    .builder::before { left: 22%; right: 22%; bottom: 22%; height: 30%; background: #fff9eb; box-shadow: inset 0 0 0 5px #9da56b; }
+    .builder::after { left: 16%; right: 16%; bottom: 50%; height: 24%; background: #2f665c; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+    .estate { background: linear-gradient(180deg, #d4e4ef 0 40%, #e8dfd0 40%); }
+    .estate::before { left: 36%; right: 36%; top: 16%; bottom: 18%; background: repeating-linear-gradient(180deg, #f8faf7 0 15px, #71869a 15px 22px); box-shadow: 0 0 0 4px #667a78; }
+    .insurance { background: linear-gradient(135deg, #efe0cf 0 46%, #fff 46% 60%, #d9e7df 60%); }
+    .insurance::before { left: 20%; bottom: 24%; width: 18%; height: 36%; border-radius: 24px 24px 12px 12px; background: #746c5d; box-shadow: 62px 0 0 #a36c64, 124px 0 0 #667a54; }
+    .inherit { background: linear-gradient(135deg, #f1ead8, #ffffff 58%, #ddebe5); }
+    .inherit::before { left: 18%; right: 14%; top: 20%; bottom: 22%; background: repeating-linear-gradient(180deg, #fff 0 15px, #d3bf8c 15px 18px); transform: rotate(-4deg); box-shadow: 12px 12px 0 rgba(70,60,45,.12); }
+    .bath { background: linear-gradient(135deg, #e6edf2 0 44%, #fff 44% 64%, #b8d0d4 64%); }
+    .bath::before { left: 16%; right: 15%; bottom: 22%; height: 38%; border-radius: 70px 70px 16px 16px; background: #fff; box-shadow: 0 -28px 0 -13px #c6d9dd; }
+
+    .main-body {
+      padding: 22px;
+    }
+
+    .tag {
+      width: fit-content;
+      border-radius: 4px;
+      padding: 5px 9px;
+      background: #eef5f1;
+      color: var(--olive-dark);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 12px 0 10px;
+      font-size: 34px;
+      line-height: 1.22;
+      font-weight: 900;
+    }
+
+    .catch {
+      margin: 0;
+      color: #394238;
+      font-size: 17px;
+      line-height: 1.75;
+      font-weight: 800;
+    }
+
+    .point-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .point {
+      border: 1px solid #e1d9c7;
+      border-radius: 8px;
+      background: #fff;
+      padding: 12px;
+      font-size: 13px;
+      line-height: 1.55;
+      font-weight: 850;
+    }
+
+    .side-card {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .side-card h2,
+    .article-card h2,
+    .map-card h2 {
+      margin: 0;
+      font-size: 21px;
+      line-height: 1.35;
+      font-weight: 900;
+    }
+
+    .info-row {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: 800;
+    }
+
+    .info-row b {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .actions {
+      display: grid;
+      gap: 9px;
+    }
+
+    .btn {
+      min-height: 46px;
+      border: 1px solid var(--olive);
+      border-radius: 7px;
+      padding: 12px 16px;
+      background: var(--olive);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 900;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn.secondary {
+      background: #fff;
+      color: var(--olive);
+    }
+
+    .qr {
+      width: 96px;
+      height: 96px;
+      border: 7px solid #fff;
+      background-color: #fff;
+      box-shadow: 0 0 0 1px #b6ae9a, 0 6px 14px rgba(0,0,0,.1);
+      background-image:
+        linear-gradient(90deg, #101814 0 13%, transparent 13% 25%, #101814 25% 38%, transparent 38% 50%, #101814 50% 63%, transparent 63% 75%, #101814 75%),
+        linear-gradient(#101814 0 11%, transparent 11% 22%, #101814 22% 33%, transparent 33% 44%, #101814 44% 55%, transparent 55% 66%, #101814 66% 77%, transparent 77%);
+      background-blend-mode: multiply;
+      margin: 0 auto;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .article-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 18px;
+      margin-top: 22px;
+      align-items: start;
+    }
+
+    .story-card,
+    .check-card,
+    .cta-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .story-card {
+      padding: 28px;
+    }
+
+    .story-kicker {
+      margin: 0 0 8px;
+      color: var(--olive);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .story-card h2 {
+      margin: 0 0 16px;
+      font-size: 28px;
+      line-height: 1.35;
+      font-weight: 900;
+    }
+
+    .story-card h3 {
+      margin: 26px 0 10px;
+      font-size: 20px;
+      line-height: 1.45;
+      font-weight: 900;
+    }
+
+    .story-card p {
+      margin: 0 0 16px;
+      color: #34433f;
+      font-size: 16px;
+      line-height: 1.95;
+      font-weight: 650;
+    }
+
+    .story-card .lead-text {
+      color: #263430;
+      font-size: 18px;
+      line-height: 1.9;
+      font-weight: 800;
+    }
+
+    .story-note {
+      margin-top: 20px;
+      border-left: 4px solid var(--olive);
+      background: #f3f8f6;
+      padding: 14px 16px;
+      color: #34433f;
+      font-size: 14px;
+      line-height: 1.75;
+      font-weight: 750;
+    }
+
+    .article-side {
+      display: grid;
+      gap: 14px;
+      position: sticky;
+      top: 18px;
+    }
+
+    .check-card,
+    .cta-card {
+      padding: 18px;
+    }
+
+    .check-card h2,
+    .cta-card h2 {
+      margin: 0 0 12px;
+      font-size: 19px;
+      line-height: 1.4;
+      font-weight: 900;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdfc;
+      padding: 10px 11px;
+      color: #34433f;
+      font-size: 13px;
+      line-height: 1.55;
+      font-weight: 800;
+    }
+
+    .cta-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 750;
+    }
+
+    .article-card,
+    .map-card {
+      padding: 18px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .photo {
+      min-height: 150px;
+      border: 1px solid #ddd2b9;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-card p,
+    .map-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+      font-weight: 800;
+    }
+
+    .map {
+      height: 260px;
+      border: 1px solid #cfd8d5;
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, transparent 0 28%, rgba(55,111,166,.28) 28% 31%, transparent 31% 100%),
+        linear-gradient(0deg, transparent 0 58%, rgba(212,123,0,.26) 58% 62%, transparent 62% 100%),
+        repeating-linear-gradient(35deg, #edf2ef 0 24px, #f9f7f0 24px 48px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map::before {
+      content: "";
+      position: absolute;
+      left: 52%;
+      top: 34%;
+      width: 26px;
+      height: 26px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      background: var(--orange);
+      box-shadow: 0 3px 10px rgba(0,0,0,.18);
+    }
+
+    .related {
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .related a {
+      display: block;
+      border: 1px solid #e1d9c7;
+      border-radius: 8px;
+      background: #fff;
+      padding: 14px;
+      text-decoration: none;
+      font-weight: 900;
+      line-height: 1.5;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      background: #fff;
+      padding: 18px 24px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .article-layout,
+      .section-grid,
+      .related-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .point-list,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .main-visual { height: 240px; }
+      h1 { font-size: 28px; }
+      .story-card { padding: 20px; }
+      .article-side { position: static; }
+      .topbar-inner, .container { padding-left: 14px; padding-right: 14px; }
+      .topbar-inner { align-items: flex-start; padding-top: 10px; padding-bottom: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="life-news-web.html">
+        <span class="mark"><strong>LIFE<br>NEWS</strong><span>保存版</span></span>
+        <span>ライフニュース</span>
+      </a>
+      <a class="back-link" href="life-news-web.html#companies">掲載企業一覧へ戻る</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <p class="breadcrumb">住まいと暮らしの安心ガイド / 掲載企業詳細</p>
+    <section class="hero">
+      <article class="main-card">
+        <div class="main-visual" id="mainVisual" aria-hidden="true"></div>
+        <div class="main-body">
+          <span class="tag" id="category"></span>
+          <h1 id="name"></h1>
+          <p class="catch" id="catch"></p>
+          <div class="point-list" id="points"></div>
+        </div>
+      </article>
+
+      <aside class="side-card">
+        <h2>問い合わせ・基本情報</h2>
+        <div class="info-row"><b>所在地</b><span id="area"></span></div>
+        <div class="info-row"><b>電話番号</b><span id="telText"></span></div>
+        <div class="info-row"><b>営業時間</b><span id="hours"></span></div>
+        <div class="actions">
+          <a class="btn" id="telButton" href="#">電話で問い合わせ</a>
+          <a class="btn secondary" href="#map">地図を見る</a>
+        </div>
+        <div class="qr" aria-hidden="true"></div>
+      </aside>
+    </section>
+
+    <section class="article-layout">
+      <article class="story-card" id="story"></article>
+      <aside class="article-side">
+        <div class="check-card">
+          <h2>相談前に確認したいこと</h2>
+          <ul class="check-list" id="checkList"></ul>
+        </div>
+        <div class="cta-card">
+          <h2>紙面から来た方へ</h2>
+          <p id="readerLead"></p>
+          <a class="btn" id="sideTelButton" href="#">電話で問い合わせ</a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section-grid">
+      <article class="article-card">
+        <h2>写真ギャラリー</h2>
+        <p id="galleryLead"></p>
+        <div class="gallery" id="gallery"></div>
+      </article>
+
+      <article class="map-card" id="map">
+        <h2>Googleマップ表示エリア</h2>
+        <p>実装時は登録住所をもとにGoogleマップを埋め込みます。紙面QRから来たユーザーが、来店・訪問相談の場所をすぐ確認できる想定です。</p>
+        <div class="map" aria-hidden="true"></div>
+      </article>
+    </section>
+
+    <section class="related">
+      <h2>この会社に関連する情報</h2>
+      <div class="related-grid">
+        <a href="#case">施工事例を見る<br><small>写真・費用感・期間</small></a>
+        <a href="#subsidy">補助金情報を確認<br><small>対象制度と相談先</small></a>
+        <a href="#column">専門家コラム<br><small>相談前に知っておきたいこと</small></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">ライフニュース 住まいと暮らしの安心ガイド / 掲載内容は提案用のダミーです</footer>
+
+  <script>
+    const companies = [
+      { id: "midori", category: "リフォーム", photo: "kitchen", name: "みどり住建リフォーム", catch: "水まわりから断熱まで、地元職人が丁寧に対応。キッチン・浴室・外壁の施工事例を多数掲載しています。", area: "東丘町3-12-8", tel: "0120-245-610", hours: "9:00-18:00 / 水曜定休", points: ["キッチン・浴室の改修", "補助金相談に対応", "施工後の点検も受付"], theme: "毎日使う場所を、家族に合わせて整えるリフォーム相談", scene: "キッチンや浴室は、暮らしの中で不便が積み重なりやすい場所です。収納が足りない、掃除に手間がかかる、冬場の浴室が寒いといった悩みは、年数を重ねるほど気になりやすくなります。", value: "同社では、現地確認をもとに水まわり、断熱、外壁などをまとめて相談できます。使い勝手だけでなく、家族構成やこれからの暮らし方に合わせて工事内容を整理できる点が特徴です。", checks: ["現在の不便を場所ごとにメモする", "予算と優先順位を家族で確認する", "補助金の対象になるか相談する"] },
+      { id: "harumi", category: "リフォーム", photo: "bath", name: "晴海設備", catch: "浴室、給湯器、洗面台の交換をまとめて相談。急な故障、補助金対象設備の見積もりにも対応します。", area: "南丘7-4-2", tel: "0120-810-314", hours: "8:30-18:00 / 日曜定休", points: ["給湯器交換", "浴室・洗面リフォーム", "即日相談受付"], theme: "急な設備トラブルも、早めの相談で暮らしへの影響を小さく", scene: "給湯器や浴室設備は、故障してから慌てて探すことが多い住まいの設備です。お湯が出にくい、浴室が寒い、洗面台が使いづらいと感じたら、交換時期や修理の目安を確認しておくと安心です。", value: "晴海設備では、浴室、給湯器、洗面台の交換相談を受け付けています。急な不具合だけでなく、補助金対象設備の見積もりも確認できるため、事前相談にも向いています。", checks: ["機器の型番や使用年数を確認する", "不具合の症状をメモする", "修理と交換の費用感を比較する"] },
+      { id: "kaze", category: "リフォーム", photo: "builder", name: "暮らし工房 風", catch: "家族構成に合わせた木の家とリノベーション。新築、間取り変更、和室改修の相談に対応。", area: "北町1-5-3", tel: "0120-456-870", hours: "10:00-17:30 / 日曜予約制", points: ["自然素材の住まい", "間取り変更", "予約制相談会"], theme: "家族の変化に合わせて、住まいの使い方を見直す", scene: "子どもの独立、親との同居、在宅時間の増加など、家族構成が変わると住まいに求めるものも変わります。使わなくなった部屋や和室を、今の暮らしに合う場所へ変える相談が増えています。", value: "暮らし工房 風では、木の家づくりやリノベーションを通じて、間取り変更や和室改修の相談に対応。素材感や居心地を大切にしながら、長く暮らせる住まいづくりを考えられます。", checks: ["今後の家族構成を想定する", "使っていない部屋を確認する", "残したい素材や雰囲気を整理する"] },
+      { id: "azuma", category: "不動産", photo: "estate", name: "東丘不動産", catch: "住み替え、査定、空き家活用を地域相場から提案。新着物件と売却相談の予約を受け付け中。", area: "東丘駅前2-1-6", tel: "025-278-8800", hours: "9:30-18:00 / 火曜定休", points: ["売却査定", "住み替え相談", "空き家活用"], theme: "今の家を売る、貸す、住み替える。迷った時に地域相場から考える", scene: "子どもの独立や定年後の暮らしをきっかけに、住まいの広さや管理の負担を見直す方が増えています。一方で、売却するべきか、貸すべきか、しばらく保有するべきかは、地域の相場や物件の状態によって判断が変わります。", value: "東丘不動産では、住み替え、売却査定、空き家活用の相談を受け付けています。駅前エリアや近隣住宅地の動きをふまえ、いまの住まいをどう活かすかを一緒に整理できるのが特徴です。", checks: ["固定資産税や維持費を確認する", "住宅ローン残債の有無を整理する", "売却・賃貸・保有の希望を家族で話す"] },
+      { id: "kitamachi", category: "不動産", photo: "builder", name: "北町ベイ不動産", catch: "空き家・相続不動産の相談も受付中。土地、中古住宅、住み替えの相談を地域密着で対応。", area: "北町通1-826", tel: "025-384-8118", hours: "9:30-18:00 / 水曜定休", points: ["土地探し", "中古住宅", "相続不動産"], theme: "土地探しから相続不動産まで、地域の事情に合わせて相談", scene: "不動産探しや空き家の管理では、インターネットの情報だけでは判断しにくいことがあります。周辺環境、道路条件、管理状態など、現地を知る会社に相談することで見えてくる情報もあります。", value: "北町ベイ不動産では、土地、中古住宅、相続不動産の相談に対応。住み替えや空き家活用を検討する際、希望条件と現実的な選択肢を整理できます。", checks: ["希望エリアと予算を整理する", "空き家の管理状態を確認する", "相続関係者の意向を共有する"] },
+      { id: "aoba", category: "相続相談", photo: "inherit", name: "青葉司法書士事務所", catch: "実家の相続、登記、空き家管理を初回からわかりやすく。登記義務化、名義変更、遺言の相談に対応。", area: "中央通り5-2-4", tel: "025-201-5501", hours: "9:00-17:00 / 平日営業", points: ["相続登記", "名義変更", "遺言相談"], theme: "実家の相続や名義変更、何から始めるかを整理する", scene: "相続は、必要な書類や手続きが多く、後回しにしてしまいがちなテーマです。特に不動産の名義変更や空き家の管理は、家族だけで判断しにくい場面があります。", value: "青葉司法書士事務所では、相続登記、名義変更、遺言相談に対応しています。手続きの流れを確認しながら、必要な準備を一つずつ整理できる相談先です。", checks: ["不動産の名義を確認する", "戸籍や固定資産税通知を探す", "家族で今後の活用方針を話す"] },
+      { id: "mirai", category: "相続相談", photo: "insurance", name: "みらい相続相談室", catch: "税理士・FPが連携して相続と生前対策をサポート。相続税、財産整理、空き家活用の相談に対応。", area: "長大通2-3-5", tel: "025-290-7702", hours: "10:00-17:00 / 予約制", points: ["相続税相談", "財産整理", "生前対策"], theme: "相続の不安を、家族で話せる形に整理する", scene: "相続や生前対策は、必要だと分かっていても話し出しにくいテーマです。財産の内容や家族の希望を整理しておくことで、将来の手続きや判断を進めやすくなります。", value: "みらい相続相談室では、税理士やFPが連携し、相続税、財産整理、空き家活用の相談に対応。家族で共有しやすい形に情報をまとめるサポートが受けられます。", checks: ["財産の種類を一覧にする", "空き家や土地の扱いを考える", "家族で相談するタイミングを決める"] },
+      { id: "partner", category: "保険", photo: "insurance", name: "ライフパートナー保険", catch: "火災・地震・水害の補償を住まいに合わせて整理。築年数や家族構成に合わせた見直し診断。", area: "緑台4-8-11", tel: "0120-111-259", hours: "10:00-19:00 / 土曜相談可", points: ["火災保険", "地震保険", "補償見直し"], theme: "住まいの保険を、いまの暮らしに合わせて見直す", scene: "火災、地震、水害への備えは、家の築年数や住んでいる地域、家族構成によって必要な確認内容が変わります。更新時期まで見直していない補償がある場合は、一度内容を確認しておくと安心です。", value: "ライフパートナー保険では、火災保険や地震保険の補償内容を整理し、住まいに合わせた見直し相談を受け付けています。土曜相談にも対応しているため、平日が忙しい方も相談しやすい窓口です。", checks: ["保険証券を用意する", "建物の築年数を確認する", "水害や地震の補償内容を見る"] },
+      { id: "anshin", category: "保険", photo: "inherit", name: "あんしん保険サービス", catch: "医療・介護・老後資金まで家計の見直しをお手伝い。生命保険、火災保険、老後資金の相談に対応。", area: "西区下本1-4-25", tel: "0120-552-661", hours: "10:00-18:00 / 日曜定休", points: ["生命保険", "医療・介護", "老後資金"], theme: "これからの家計と保障を、無理なく見直す", scene: "子どもの独立や退職前後は、保険や老後資金を見直すきっかけになります。以前加入した保障が今の暮らしに合っているか、家計の負担とあわせて確認することが大切です。", value: "あんしん保険サービスでは、生命保険、医療・介護、老後資金の相談に対応。現在の契約内容を確認しながら、必要な保障を整理できます。", checks: ["加入中の保険内容を確認する", "毎月の保険料を把握する", "今後の医療・介護の不安を書き出す"] },
+      { id: "energy", category: "住宅設備", photo: "bath", name: "中央エネルギー", catch: "エコキュート・ガス給湯器の交換、修理に対応。急な給湯器故障、交換見積、設備点検の相談に対応。", area: "中央区住吉1-8", tel: "0120-66-1948", hours: "8:00-19:00 / 受付無休", points: ["給湯器交換", "設備点検", "修理相談"], theme: "毎日使う給湯設備を、故障前から確認しておく", scene: "給湯器は、暮らしに欠かせない設備のひとつです。お湯の温度が安定しない、異音がする、使用年数が長いといった場合は、急な故障に備えて相談先を確認しておくと安心です。", value: "中央エネルギーでは、エコキュートやガス給湯器の交換、修理、設備点検の相談に対応。受付時間が長く、急なトラブル時にも問い合わせしやすいのが特徴です。", checks: ["使用年数と型番を確認する", "不具合の症状をメモする", "修理と交換の目安を聞く"] },
+      { id: "solar", category: "住宅設備", photo: "builder", name: "ソラ住まいラボ", catch: "電気代を賢く節約。太陽光と蓄電池を比較できます。無料シミュレーションに対応。", area: "東区明石2-10", tel: "0120-319-881", hours: "9:00-18:00 / 予約制", points: ["太陽光", "蓄電池", "V2H相談"], theme: "電気代と災害時の備えを、屋根から考える", scene: "電気代の上昇や停電時の備えをきっかけに、太陽光や蓄電池を検討する家庭が増えています。ただし、屋根の形状や日当たり、電気の使い方によって向き不向きがあります。", value: "ソラ住まいラボでは、太陽光、蓄電池、V2Hの無料シミュレーションに対応。導入前に費用感や使い方を比較し、家庭に合う選択肢を確認できます。", checks: ["電気使用量を確認する", "屋根の状態を把握する", "停電時に使いたい設備を考える"] }
+    ];
+
+    const params = new URLSearchParams(location.search);
+    const id = params.get("id") || "midori";
+    const company = companies.find(item => item.id === id) || companies[0];
+
+    document.title = `${company.name} | 住まいと暮らしの安心ガイド`;
+    document.getElementById("mainVisual").className = `main-visual ${company.photo}`;
+    document.getElementById("category").textContent = company.category;
+    document.getElementById("name").textContent = company.name;
+    document.getElementById("catch").textContent = company.catch;
+    document.getElementById("area").textContent = company.area;
+    document.getElementById("telText").textContent = company.tel;
+    document.getElementById("hours").textContent = company.hours;
+    document.getElementById("telButton").href = `tel:${company.tel.replaceAll("-", "")}`;
+    document.getElementById("sideTelButton").href = `tel:${company.tel.replaceAll("-", "")}`;
+    document.getElementById("points").innerHTML = company.points.map(point => `<div class="point">${point}</div>`).join("");
+    document.getElementById("story").innerHTML = `
+      <p class="story-kicker">${company.category} / ライフニュース掲載企業</p>
+      <h2>${company.theme || `${company.name}のサービス紹介`}</h2>
+      <p class="lead-text">${company.catch}</p>
+      <h3>こんな時に相談できます</h3>
+      <p>${company.scene || "住まいに関する悩みは、家族構成や暮らし方によって変わります。まずは現在の状況を整理し、相談先に伝えることが大切です。"}</p>
+      <h3>${company.name}の特徴</h3>
+      <p>${company.value || company.catch}</p>
+      <h3>紙面では伝えきれない情報</h3>
+      <p>Webページでは、所在地、営業時間、問い合わせ先に加えて、写真ギャラリーや地図情報も確認できます。紙面で気になった企業について、相談前に基本情報を整理できるようにしています。</p>
+      <div class="story-note">掲載内容はライフニュースの提案用サンプルです。実際の公開時は、各社の最新情報、対応範囲、費用、相談条件を確認してから掲載します。</div>
+    `;
+    document.getElementById("checkList").innerHTML = (company.checks || company.points).map(item => `<li>${item}</li>`).join("");
+    document.getElementById("readerLead").textContent = `紙面で${company.name}が気になった方は、相談内容を簡単に整理してから問い合わせると話が進めやすくなります。`;
+    document.getElementById("galleryLead").textContent = `${company.name}の写真ギャラリー。実装時はCMSに登録した施工写真、外観、スタッフ写真を表示します。`;
+    document.getElementById("gallery").innerHTML = [company.photo, "builder", "kitchen"].map(photo => `<div class="photo ${photo}" aria-hidden="true"></div>`).join("");
+  </script>
+</body>
+</html>
