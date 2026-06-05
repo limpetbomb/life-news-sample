@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ライフニュース リニューアル試作 社内確認メニュー</title>
+  <style>
+    :root {
+      --ink: #1f2a25;
+      --muted: #63726c;
+      --bg: #f5f7f3;
+      --card: #ffffff;
+      --line: #d8e0dc;
+      --green: #13766d;
+      --blue: #2d6f9f;
+      --amber: #b9822f;
+      --shadow: 0 18px 44px rgba(25, 42, 37, .11);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+      letter-spacing: 0;
+      background:
+        linear-gradient(180deg, #ffffff 0, var(--bg) 560px),
+        radial-gradient(circle at 15% 0%, rgba(19, 118, 109, .10), transparent 430px);
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 34px 0 26px;
+      border-bottom: 1px solid rgba(216, 224, 220, .9);
+      background: rgba(255, 255, 255, .88);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      color: #0b514b;
+      font-weight: 900;
+    }
+
+    .mark {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      line-height: 1.05;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 6vw, 54px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    main {
+      padding: 34px 0 52px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #0b514b;
+      background: #e8f2ee;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .tag::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .wide {
+      grid-column: span 2;
+      min-height: 190px;
+      background:
+        linear-gradient(135deg, rgba(19, 118, 109, .10), rgba(45, 111, 159, .10)),
+        #fff;
+    }
+
+    .tools {
+      margin-top: 28px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+    }
+
+    .tools h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+    }
+
+    .note {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 760px) {
+      .wrap {
+        width: min(100% - 28px, 1080px);
+      }
+
+      header {
+        padding-top: 24px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .wide {
+        grid-column: auto;
+      }
+
+      .card {
+        min-height: auto;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="mark">LIFE<br>NEWS</div>
+        <div>ライフニュース<br>社内確認メニュー</div>
+      </div>
+      <p class="eyebrow">各サンプルページ・試作ツールへの入口</p>
+      <h1>ライフニュース リニューアル試作</h1>
+      <p class="lead">D3折込チラシをきっかけにWebへ誘導し、掲載企業の詳しい情報や記事コンテンツ、問い合わせ導線につなげるための試作サイトです。紙面は入口として分かりやすく整理し、Web側で情報量と広告価値を広げる構成を想定しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="grid">
+        <a class="card wide" href="life-news-web.html?desktop-preview">
+          <span class="tag">メインサンプル</span>
+          <div>
+            <strong>Web特集ページ</strong>
+            <p>紙面からQRコードで遷移した読者が、カテゴリ別に掲載企業を探せる地域情報ポータル型のページです。</p>
+          </div>
+        </a>
+
+        <a class="card" href="life-news-company.html?id=azuma&v=article1">
+          <span class="tag">記事ページ</span>
+          <div>
+            <strong>個別企業の読み物ページ</strong>
+            <p>紙面では載せきれない相談内容、施工事例、問い合わせ前の確認事項を記事として見せるページです。</p>
+          </div>
+        </a>
+
+        <a class="card" href="life-news-mobile.html">
+          <span class="tag">スマホ確認</span>
+          <div>
+            <strong>スマートフォン版</strong>
+            <p>新聞折込のQRコードからスマホで閲覧する想定の、情報収集しやすい縦長UIです。</p>
+          </div>
+        </a>
+      </div>
+
+      <section class="tools">
+        <h2>社内運用ツール試作</h2>
+        <div class="grid">
+          <a class="card" href="life-news-admin.html">
+            <span class="tag">管理DB</span>
+            <div>
+              <strong>掲載企業情報管理</strong>
+              <p>営業・制作が掲載企業情報を登録し、一覧、記事プレビュー、CSV出力まで確認できる簡易DBです。</p>
+            </div>
+          </a>
+
+          <a class="card" href="life-news-copy-generator.html">
+            <span class="tag">原稿生成</span>
+            <div>
+              <strong>原稿自動生成ツール</strong>
+              <p>企業情報をもとに、紙面用短文、Web記事、SNS投稿、QR誘導文などを生成する試作品です。</p>
+            </div>
+          </a>
+        </div>
+        <p class="note">このページ自体はサンプルサイト本体ではなく、社内確認用のメニューです。営業共有時は、必要に応じて「Web特集ページ」への直接URLを送ってください。</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
