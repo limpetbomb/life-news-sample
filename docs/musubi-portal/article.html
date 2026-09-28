@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>記事詳細 | むすび</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Detail Header: 記事ページ用のコンパクトヘッダー -->
+  <header class="detail-header">
+    <a class="detail-logo" href="index.html" aria-label="むすび トップへ戻る">
+      <img class="site-logo-image" src="assets/musubi-logo-wide.png" alt="むすび">
+    </a>
+    <a class="back-home" href="index.html#articles">記事一覧へ</a>
+  </header>
+
+  <!-- Article Detail: CMS記事詳細ページのサンプル -->
+  <main class="detail-page">
+    <article class="detail-article" id="articleDetail"></article>
+
+    <!-- Related Articles: 関連記事のサンプル -->
+    <section class="detail-related">
+      <div class="feed-heading">
+        <div>
+          <p class="section-kicker">Related</p>
+          <h2>関連記事</h2>
+        </div>
+      </div>
+      <div class="article-list" id="relatedArticles"></div>
+    </section>
+  </main>
+
+  <script src="article-detail.js"></script>
+</body>
+</html>

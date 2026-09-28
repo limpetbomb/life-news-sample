@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>むすび | 子育て・暮らしポータル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header: ロゴ / TODAY / 補助リンク / メニュー / カテゴリ / おすすめ記事 -->
+  <header class="site-header">
+      <div class="header-main">
+        <a class="logo" href="#" aria-label="むすび トップ">
+          <img class="site-logo-image" src="assets/musubi-logo-wide.png" alt="むすび">
+        </a>
+        <div class="today-box" aria-label="今日の情報">
+          <span>TODAY</span>
+          <strong>6/11</strong>
+        </div>
+      </div>
+      <!-- Category Navigation: アイコン付き横スクロールカテゴリーナビ -->
+      <nav class="category-nav header-category-nav" aria-label="カテゴリー">
+        <button class="category-tab active" data-category-tab="すべて">
+          <span class="category-icon icon-all"></span>
+          <span>すべて</span>
+        </button>
+        <button class="category-tab" data-category-tab="教育">
+          <span class="category-icon icon-pencil"></span>
+          <span>学び・遊び・教育</span>
+        </button>
+        <button class="category-tab" data-category-tab="子育て">
+          <span class="category-icon icon-heart"></span>
+          <span>子どもの健康・発達</span>
+        </button>
+        <button class="category-tab" data-category-tab="食・レシピ">
+          <span class="category-icon icon-food"></span>
+          <span>食・レシピ</span>
+        </button>
+        <button class="category-tab" data-category-tab="暮らし">
+          <span class="category-icon icon-home"></span>
+          <span>家事・住まい</span>
+        </button>
+        <button class="category-tab" data-category-tab="おでかけ">
+          <span class="category-icon icon-bag"></span>
+          <span>おでかけ・旅行</span>
+        </button>
+        <div class="category-actions" aria-label="SNSとメニュー">
+          <a class="nav-icon-link nav-x" href="https://x.com/" target="_blank" rel="noopener" aria-label="Xを開く">
+            <img src="assets/x-logo-black.png" alt="">
+          </a>
+          <a class="nav-icon-link nav-instagram" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagramを開く">
+            <img src="assets/instagram-glyph.png" alt="">
+          </a>
+          <button class="nav-icon-link nav-menu" type="button" data-open-menu aria-label="検索メニューを開く">
+            <img src="assets/search-menu-icon.png" alt="">
+          </button>
+        </div>
+      </nav>
+  </header>
+
+  <!-- Search Menu Overlay: 検索ポップアップ / メニュー -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+      <div class="menu-panel" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+        <div class="menu-head">
+          <div>
+            <p class="section-kicker">Menu & Search</p>
+            <h2 id="menuTitle">記事を探す</h2>
+          </div>
+          <button class="close-button" type="button" data-close-menu aria-label="メニューを閉じる">×</button>
+        </div>
+        <form class="search-panel menu-search" id="searchForm">
+          <label class="field">
+            <span>キーワード検索</span>
+            <input id="keywordInput" type="search" placeholder="時短、夏休み、習い事">
+          </label>
+          <div class="filter-grid">
+            <label class="field">
+              <span>カテゴリー</span>
+              <select id="categoryFilter">
+                <option value="すべて">すべて</option>
+                <option value="子育て">子育て</option>
+                <option value="暮らし">暮らし</option>
+                <option value="教育">教育</option>
+                <option value="おでかけ">おでかけ</option>
+                <option value="食・レシピ">食・レシピ</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>タグ</span>
+              <select id="tagFilter">
+                <option value="すべて">すべて</option>
+                <option value="時短">時短</option>
+                <option value="朝時間">朝時間</option>
+                <option value="ワーママ">ワーママ</option>
+                <option value="学び">学び</option>
+                <option value="小学生">小学生</option>
+                <option value="レシピ">レシピ</option>
+                <option value="夏休み">夏休み</option>
+                <option value="子育て">子育て</option>
+                <option value="デジタル">デジタル</option>
+                <option value="親子ごはん">親子ごはん</option>
+                <option value="水遊び">水遊び</option>
+                <option value="習い事">習い事</option>
+                <option value="収納">収納</option>
+                <option value="週末">週末</option>
+                <option value="雨の日">雨の日</option>
+                <option value="おでかけ">おでかけ</option>
+                <option value="家事">家事</option>
+              </select>
+            </label>
+          </div>
+          <div class="search-actions">
+            <button class="primary-button" type="submit">検索する</button>
+            <button class="text-button" id="resetButton" type="button">リセット</button>
+          </div>
+        </form>
+
+        <!-- Menu Links: STUDIO実装時は固定リンクまたはCMSカテゴリリンク -->
+        <nav class="menu-links" aria-label="メニュー">
+          <a href="#articles" data-close-menu>新着記事</a>
+          <a href="#trend" data-close-menu>トレンド</a>
+        </nav>
+        <div class="drawer-tags" aria-label="タグ一覧">
+          <p class="drawer-label">TAGS</p>
+          <div class="drawer-tag-list">
+            <button type="button" data-keyword="夏休み" data-close-menu>#夏休み</button>
+            <button type="button" data-keyword="時短" data-close-menu>#時短</button>
+            <button type="button" data-keyword="朝時間" data-close-menu>#朝時間</button>
+            <button type="button" data-keyword="ワーママ" data-close-menu>#ワーママ</button>
+            <button type="button" data-keyword="学び" data-close-menu>#学び</button>
+            <button type="button" data-keyword="小学生" data-close-menu>#小学生</button>
+            <button type="button" data-keyword="レシピ" data-close-menu>#レシピ</button>
+            <button type="button" data-keyword="親子ごはん" data-close-menu>#親子ごはん</button>
+            <button type="button" data-keyword="水遊び" data-close-menu>#水遊び</button>
+            <button type="button" data-keyword="習い事" data-close-menu>#習い事</button>
+            <button type="button" data-keyword="収納" data-close-menu>#収納</button>
+            <button type="button" data-keyword="週末" data-close-menu>#週末</button>
+            <button type="button" data-keyword="雨の日" data-close-menu>#雨の日</button>
+            <button type="button" data-keyword="家事" data-close-menu>#家事</button>
+            <button type="button" data-keyword="デジタル" data-close-menu>#デジタル</button>
+            <button type="button" data-keyword="子育て" data-close-menu>#子育て</button>
+            <button type="button" data-keyword="おでかけ" data-close-menu>#おでかけ</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <!-- Page Shell: PC表示時は下部を広い記事グリッドで表示 -->
+  <div class="site-shell">
+    <main class="wide-main">
+      <section class="wide-layout">
+        <section class="feed-area">
+          <!-- Tag Bar -->
+          <div class="feed-toolbar" id="trend">
+            <div class="feed-tags">
+              <span class="toolbar-label">◇ TAGS</span>
+              <div class="keyword-list" id="trendKeywords">
+                <button type="button" data-keyword="夏休み">#夏休み</button>
+                <button type="button" data-keyword="時短">#時短</button>
+                <button type="button" data-keyword="朝時間">#朝時間</button>
+                <button type="button" data-keyword="ワーママ">#ワーママ</button>
+                <button type="button" data-keyword="学び">#学び</button>
+                <button type="button" data-keyword="小学生">#小学生</button>
+                <button type="button" data-keyword="レシピ">#レシピ</button>
+                <button type="button" data-keyword="親子ごはん">#親子ごはん</button>
+                <button type="button" data-keyword="水遊び">#水遊び</button>
+                <button type="button" data-keyword="習い事">#習い事</button>
+                <button type="button" data-keyword="収納">#収納</button>
+                <button type="button" data-keyword="家事">#家事</button>
+                <button type="button" data-keyword="デジタル">#デジタル</button>
+                <button type="button" data-keyword="子育て">#子育て</button>
+                <button type="button" data-keyword="週末">#週末</button>
+                <button type="button" data-keyword="雨の日">#雨の日</button>
+                <button type="button" data-keyword="おでかけ">#おでかけ</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search Chips: 現在の検索条件 / 解除 -->
+          <div class="active-filter-bar" id="activeFilterBar" hidden></div>
+
+          <!-- Series Feature: 連載 / 特集の帯 -->
+          <section class="series-strip" aria-label="連載と特集">
+            <a class="series-card series-main" href="index.html?tag=夏休み#articles">
+              <span class="series-label">Special</span>
+              <strong>夏休み前の、親子じかん準備帖</strong>
+              <span>予定表、スクリーン時間、水遊び準備までまとめてチェック。</span>
+            </a>
+            <a class="series-card" href="index.html?category=暮らし#articles">
+              <span class="series-label">Serial</span>
+              <strong>夜5分の暮らしリセット</strong>
+              <span>家事が少し軽くなる、小さな習慣の連載。</span>
+            </a>
+            <a class="series-card" href="index.html?tag=習い事#articles">
+              <span class="series-label">Focus</span>
+              <strong>はじめての習い事ナビ</strong>
+              <span>通いやすさと子どもの気持ちを一緒に見る。</span>
+            </a>
+          </section>
+
+          <!-- Article List: 検索結果 / 記事カード一覧 -->
+          <section class="article-section" id="articles">
+            <div class="feed-heading">
+              <div>
+                <p class="section-kicker">Articles</p>
+                <h2>新着記事</h2>
+              </div>
+              <p class="result-count" id="resultCount">0件</p>
+            </div>
+            <div class="article-list" id="articleList"></div>
+            <div class="empty-state" id="emptyState" hidden>
+              <p class="empty-title">該当する記事がありません</p>
+              <p>キーワードやカテゴリーを変えて、もう一度検索してみてください。</p>
+            </div>
+          </section>
+
+          <!-- Editor Feature: 編集部おすすめ記事の特集ブロック -->
+          <section class="editor-feature-section" id="editorPicks">
+            <div class="editor-feature-head">
+              <div>
+                <p class="section-kicker">Editor's Pick</p>
+                <h2>編集部のおすすめ</h2>
+              </div>
+              <p>毎日の子育てと暮らしが少し楽しくなる、編集部いちおしの記事をまとめました。</p>
+            </div>
+            <div class="editor-card-list" id="editorCardList"></div>
+          </section>
+
+          <!-- Ranking: 週間ランキング -->
+          <section class="ranking-section" aria-label="週間ランキング">
+            <div class="ranking-head">
+              <div>
+                <p class="section-kicker">Weekly Ranking</p>
+                <h2>週間ランキング</h2>
+              </div>
+              <p>読まれている記事をさっと確認できます。</p>
+            </div>
+            <div class="ranking-list" id="rankingList"></div>
+          </section>
+
+          <!-- Header Picks: おすすめ記事 / 特集記事の横流れピックアップ -->
+          <section class="header-picks bottom-picks" aria-label="おすすめ記事と特集記事">
+            <div class="picks-marquee">
+              <div class="picks-track">
+                <a class="pick-card" href="article.html?id=6">
+                  <span class="pick-thumb pick-thumb-orange"></span>
+                  <span class="pick-badge">特集</span>
+                  <strong>夏休み前に整えたい親子の予定表</strong>
+                  <time class="pick-date">2026/06/11</time>
+                  <span class="pick-tags">#夏休み #子育て #時短</span>
+                  <span class="pick-author">むすび編集部</span>
+                </a>
+                <a class="pick-card" href="article.html?id=8">
+                  <span class="pick-thumb pick-thumb-blue"></span>
+                  <span class="pick-badge blue">教育</span>
+                  <strong>習い事を始める前に見る3つの相性</strong>
+                  <time class="pick-date">2026/06/10</time>
+                  <span class="pick-tags">#習い事 #学び #親子</span>
+                  <span class="pick-author">佐伯ゆい</span>
+                </a>
+                <a class="pick-card" href="article.html?id=3">
+                  <span class="pick-thumb pick-thumb-pink"></span>
+                  <span class="pick-badge pink">レシピ</span>
+                  <strong>15分でできる親子ごはんアイデア</strong>
+                  <time class="pick-date">2026/06/09</time>
+                  <span class="pick-tags">#レシピ #親子ごはん</span>
+                  <span class="pick-author">食卓ラボ</span>
+                </a>
+                <a class="pick-card" href="article.html?id=1">
+                  <span class="pick-thumb pick-thumb-mint"></span>
+                  <span class="pick-badge mint">暮らし</span>
+                  <strong>朝の支度を10分短くするコツ</strong>
+                  <time class="pick-date">2026/06/08</time>
+                  <span class="pick-tags">#朝時間 #家事 #収納</span>
+                  <span class="pick-author">むすび編集部</span>
+                </a>
+                <a class="pick-card" href="article.html?id=6" aria-hidden="true">
+                  <span class="pick-thumb pick-thumb-orange"></span>
+                  <span class="pick-badge">特集</span>
+                  <strong>夏休み前に整えたい親子の予定表</strong>
+                  <time class="pick-date">2026/06/11</time>
+                  <span class="pick-tags">#夏休み #子育て #時短</span>
+                  <span class="pick-author">むすび編集部</span>
+                </a>
+                <a class="pick-card" href="article.html?id=8" aria-hidden="true">
+                  <span class="pick-thumb pick-thumb-blue"></span>
+                  <span class="pick-badge blue">教育</span>
+                  <strong>習い事を始める前に見る3つの相性</strong>
+                  <time class="pick-date">2026/06/10</time>
+                  <span class="pick-tags">#習い事 #学び #親子</span>
+                  <span class="pick-author">佐伯ゆい</span>
+                </a>
+                <a class="pick-card" href="article.html?id=3" aria-hidden="true">
+                  <span class="pick-thumb pick-thumb-pink"></span>
+                  <span class="pick-badge pink">レシピ</span>
+                  <strong>15分でできる親子ごはんアイデア</strong>
+                  <time class="pick-date">2026/06/09</time>
+                  <span class="pick-tags">#レシピ #親子ごはん</span>
+                  <span class="pick-author">食卓ラボ</span>
+                </a>
+                <a class="pick-card" href="article.html?id=1" aria-hidden="true">
+                  <span class="pick-thumb pick-thumb-mint"></span>
+                  <span class="pick-badge mint">暮らし</span>
+                  <strong>朝の支度を10分短くするコツ</strong>
+                  <time class="pick-date">2026/06/08</time>
+                  <span class="pick-tags">#朝時間 #家事 #収納</span>
+                  <span class="pick-author">むすび編集部</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
